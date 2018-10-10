@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { colors, spacing, font } from '../themes'
 
 export default () => (
   <Head>
@@ -24,10 +25,10 @@ export default () => (
 
       body {
         font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 1.6;
-        color: #111;
+        font-size: ${font.sizes.default};
+        font-weight: ${font.weights.default};
+        line-height: ${spacing.lineHeight};
+        color: ${colors.default};
         margin: 0;
       }
     `}</style>
