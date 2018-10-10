@@ -4,10 +4,13 @@
   "description": "unsplash",
   "main": "index.js",
   "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
+    "lodash": "^4.17.11",
     "next": "^7.0.1",
     "normalize.css": "^8.0.0",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "unfetch": "^4.0.1"
   },
   "devDependencies": {
     "prop-types": "^15.6.2"
