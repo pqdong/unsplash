@@ -5,6 +5,10 @@ export const colors = {
 
 export const spacing = {
   default: '16px',
+  half: '8px',
+  radius: {
+    default: '4px',
+  },
   lineHeight: 1.6,
 }
 

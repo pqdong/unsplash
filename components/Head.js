@@ -10,6 +10,8 @@ export default () => (
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui"
     />
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+
     <style jsx global>{`
       *, body {
         box-sizing: border-box;
@@ -30,6 +32,21 @@ export default () => (
         line-height: ${spacing.lineHeight};
         color: ${colors.default};
         margin: 0;
+      }
+
+      a {
+        text-decoration: none;
+        transition: color .2s ease-in-out,opacity .2s ease-in-out;
+      }
+
+      input {
+        font-size: 14px;
+      }
+
+      input:focus,
+      button:focus {
+        outline: none;
+        font-size: ${font.sizes.default}
       }
     `}</style>
   </Head>
