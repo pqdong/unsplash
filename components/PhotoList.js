@@ -1,6 +1,8 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import filter from 'lodash/filter'
 import LazyLoad from 'react-lazyload'
+import Waypoint from 'react-waypoint'
+import Spinner from './Spinner'
 import { spacing } from '../themes'
 
 class PhotoList extends PureComponent {
@@ -27,6 +29,14 @@ class PhotoList extends PureComponent {
   }
 
   flex = (height, width) => `${height / width * 100}%`
+
+  onEnter = () => {
+    console.log('onEnter')
+  }
+
+  onLeave = () => {
+    console.log('onLeave')
+  }
 
   renderImg = photo => (
     <div
@@ -57,6 +67,7 @@ class PhotoList extends PureComponent {
           left: 0;
           right: 0;
           bottom: 0;
+          background-color: #ddd;
         }
 
         .img {
@@ -69,22 +80,24 @@ class PhotoList extends PureComponent {
     </div>
   )
 
-  render() {
+  renderContent = () => {
     const { photos = [] } = this.props
     const layout = this.layout(photos)
 
     return (
-      <div className="root">
-        <div className="wrapper">
-          <div className="row">
-            <div className="first col">
-              {layout.first.map(photo => this.renderImg(photo))}
-            </div>
-            <div className="second col">
-              {layout.second.map(photo => this.renderImg(photo))}
-            </div>
-            <div className="third col">
-              {layout.third.map(photo => this.renderImg(photo))}
+      <div>
+        <div className="root">
+          <div className="wrapper">
+            <div className="row">
+              <div className="first col">
+                {layout.first.map(photo => this.renderImg(photo))}
+              </div>
+              <div className="second col">
+                {layout.second.map(photo => this.renderImg(photo))}
+              </div>
+              <div className="third col">
+                {layout.third.map(photo => this.renderImg(photo))}
+              </div>
             </div>
           </div>
         </div>
@@ -92,7 +105,9 @@ class PhotoList extends PureComponent {
         <style jsx>{`
           .wrapper {
             max-width: 1320px;
-            margin: 48px auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 48px;
           }
 
           .row {
@@ -108,6 +123,19 @@ class PhotoList extends PureComponent {
           }
         `}</style>
       </div>
+    )
+  }
+
+  render() {
+    return (
+      <Fragment>
+        {this.renderContent()}
+        <Waypoint onEnter={this.onEnter} onLeave={this.onLeave}>
+          <div className="loading">
+            <Spinner />
+          </div>
+        </Waypoint>
+      </Fragment>
     )
   }
 }

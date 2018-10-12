@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { colors } from '../themes'
 
@@ -19,30 +19,40 @@ const HeaderNav = ({ page }) => {
   ]
 
   return (
-    <ul className="root">
-      {headerNavItems.map(headerNavItem => {
-        if (page === headerNavItem.name) {
+    <Fragment>
+      <ul className="root">
+        {headerNavItems.map(headerNavItem => {
+          if (page === headerNavItem.name) {
+            return (
+              <li key={headerNavItem.name} className="item">
+                <a href="#" className="link link-active">
+                  {headerNavItem.name}
+                </a>
+              </li>
+            )
+          }
+
           return (
             <li key={headerNavItem.name} className="item">
-              <a href="#" className="link link-active">{headerNavItem.name}</a>
+              <Link href={headerNavItem.href} prefetch passHref>
+                <a className="link">{headerNavItem.name}</a>
+              </Link>
             </li>
           )
-        }
+        })}
+      </ul>
 
-        return (
-          <li key={headerNavItem.name} className="item">
-            <Link href={headerNavItem.href} prefetch passHref>
-              <a className="link">{headerNavItem.name}</a>
-            </Link>
-          </li>
-        )
-      })}
       <style jsx>{`
         .root {
           list-style: none;
           margin: 0;
           padding: 0;
           display: flex;
+          height: 100%;
+        }
+
+        .item {
+          height: 100%;
         }
 
         .link {
@@ -51,6 +61,8 @@ const HeaderNav = ({ page }) => {
           color: ${colors.inactive};
           font-weight: 500;
           transition: color .2s ease-in-out, opacity .2s ease-in-out;
+          display: flex;
+          align-item: center;
         }
 
         .link:hover {
@@ -62,7 +74,7 @@ const HeaderNav = ({ page }) => {
           color: ${colors.default};
         }
       `}</style>
-    </ul>
+    </Fragment>
   )
 }
 

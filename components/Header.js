@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import Logo from './Logo'
 import HeaderNav from './HeaderNav'
@@ -6,19 +6,21 @@ import HeaderUser from './HeaderUser'
 import { spacing } from '../themes'
 
 const Header = () => (
-  <header>
-    <nav>
-      <Link href="/" prefetch passHref>
-        <a>
-          <Logo />
-        </a>
-      </Link>
+  <Fragment>
+    <header>
+      <nav>
+        <Link href="/" prefetch passHref>
+          <a>
+            <Logo />
+          </a>
+        </Link>
 
-      <div className="right">
-        <HeaderNav page="Home" />
-        <HeaderUser />
-      </div>
-    </nav>
+        <div className="right">
+          <HeaderNav page="Home" />
+          <HeaderUser />
+        </div>
+      </nav>
+    </header>
 
     <style jsx>{`
       header {
@@ -43,9 +45,10 @@ const Header = () => (
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 100%;
       }
     `}</style>
-  </header>
+  </Fragment>
 )
 
 export default Header
