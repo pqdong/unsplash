@@ -5,6 +5,11 @@ export const actionTypes = keyMirror({
   SAVE_LATEST_PHOTOS: null,
 })
 
+export const loadLatestPhotos = params => ({
+  type: actionTypes.LOAD_LATEST_PHOTOS,
+  params,
+})
+
 export const saveLatestPhotos = photos => {
   return {
     type: actionTypes.SAVE_LATEST_PHOTOS,
@@ -20,10 +25,15 @@ const photos = (
   action,
 ) => {
   switch (action.type) {
+    case actionTypes.LOAD_LATEST_PHOTOS:
+      return {
+        ...state,
+        ...{ loading: true },
+      }
     case actionTypes.SAVE_LATEST_PHOTOS:
       return {
         ...state,
-        ...{ latest: action.photos },
+        ...{ loading: false, latest: action.photos },
       }
     default:
       return state

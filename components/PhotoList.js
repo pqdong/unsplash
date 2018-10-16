@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import filter from 'lodash/filter'
 import LazyLoad from 'react-lazyload'
 import Waypoint from 'react-waypoint'
@@ -6,6 +7,12 @@ import Spinner from './Spinner'
 import { spacing } from '../themes'
 
 class PhotoList extends PureComponent {
+  constructor(props) {
+    super(props)
+
+    this.currentPage = props.currentPage
+  }
+
   layout = (photos = []) => {
     const length = Math.floor(photos.length / 3)
     const first = [0]
@@ -31,12 +38,16 @@ class PhotoList extends PureComponent {
   flex = (height, width) => `${height / width * 100}%`
 
   onEnter = () => {
-    console.log('onEnter')
+    const { onLoad } = this.props
+
+    this.currentPage += 1
+
+    if (onLoad) {
+      onLoad(this.currentPage)
+    }
   }
 
-  onLeave = () => {
-    console.log('onLeave')
-  }
+  onLeave = () => {}
 
   renderImg = photo => (
     <div
@@ -127,17 +138,35 @@ class PhotoList extends PureComponent {
   }
 
   render() {
+    const { loading } = this.props
+
     return (
       <Fragment>
         {this.renderContent()}
+
         <Waypoint onEnter={this.onEnter} onLeave={this.onLeave}>
+
           <div className="loading">
-            <Spinner />
+            {loading && <Spinner />}
           </div>
         </Waypoint>
+
+        <style jsx>{`
+          .loading {
+            height: 48px;
+          }
+        `}</style>
       </Fragment>
     )
   }
+}
+
+PhotoList.propTypes = {
+  currentPage: PropTypes.number,
+}
+
+PhotoList.defaultProps = {
+  currentPage: 1,
 }
 
 export default PhotoList

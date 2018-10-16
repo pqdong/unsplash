@@ -3,9 +3,11 @@ import { put, takeLatest } from 'redux-saga/effects'
 import { actionTypes, saveLatestPhotos } from '../reducers/photos'
 import { fetchPublic } from '../api'
 
-function* loadLatestPhotos(params = {}) {
+function* loadLatestPhotos(data) {
   try {
-    const res = yield fetchPublic(`/photos${queryString(params)}`)
+    const res = yield fetchPublic(
+      `/photos?${queryString.stringify(data.params)}`,
+    )
     const payload = yield res.json()
 
     yield put(saveLatestPhotos(payload))
@@ -14,4 +16,7 @@ function* loadLatestPhotos(params = {}) {
   }
 }
 
-export const 
+export const sagaLoadLatestPhotos = takeLatest(
+  actionTypes.LOAD_LATEST_PHOTOS,
+  loadLatestPhotos,
+)

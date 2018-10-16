@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import Head from '../components/Head'
 import Header from '../components/Header'
 import Banner from '../components/Banner'
-import PhotoList from '../components/PhotoList'
+import LatestPhotoList from '../containers/LatestPhotoList'
 import { fetchPublic } from '../api'
 
 class HomePage extends PureComponent {
@@ -12,7 +12,7 @@ class HomePage extends PureComponent {
     )
     const banner = await resBanner.json()
     const resPhotos = await fetchPublic(
-      '/photos?page=1&per_page=10&order_by=latest',
+      '/photos?page=1&per_page=40&order_by=latest',
     )
     const photos = await resPhotos.json()
 
@@ -27,7 +27,7 @@ class HomePage extends PureComponent {
         <Head />
         <Header />
         <Banner banner={banner} />
-        <PhotoList photos={photos} />
+        <LatestPhotoList photos={photos} />
       </Fragment>
     )
   }
