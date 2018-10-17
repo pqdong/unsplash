@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Link from 'next/link'
+import Link from './Link'
 import { colors } from '../themes'
 
 const HeaderNav = ({ page }) => {
@@ -22,19 +22,14 @@ const HeaderNav = ({ page }) => {
     <Fragment>
       <ul className="root">
         {headerNavItems.map(headerNavItem => {
-          if (page === headerNavItem.name) {
-            return (
-              <li key={headerNavItem.name} className="item">
-                <a href="#" className="link link-active">
-                  {headerNavItem.name}
-                </a>
-              </li>
-            )
-          }
-
           return (
             <li key={headerNavItem.name} className="item">
-              <Link href={headerNavItem.href} prefetch passHref>
+              <Link
+                href={headerNavItem.href}
+                prefetch
+                passHref
+                activeClassName="link-active"
+              >
                 <a className="link">{headerNavItem.name}</a>
               </Link>
             </li>

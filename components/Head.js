@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import { colors, spacing, font } from '../themes'
 
-export default () => (
+export default ({ title = 'Beautiful Free Images & Pictures | Unsplash' }) => (
   <Head>
-    <title>Beautiful Free Images & Pictures | Unsplash</title>
+    <title>{title}</title>
     <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="charset" content="UTF8" />
     <meta

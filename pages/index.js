@@ -1,8 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import Head from '../components/Head'
-import Header from '../components/Header'
-import Banner from '../components/Banner'
-import PhotoListNav from '../components/PhotoListNav'
+import Layout from '../components/Layout'
 import LatestPhotoList from '../containers/LatestPhotoList'
 import { fetchPublic } from '../api'
 
@@ -24,13 +21,9 @@ class HomePage extends PureComponent {
     const { banner, photos } = this.props
 
     return (
-      <Fragment>
-        <Head />
-        <Header />
-        <Banner banner={banner} />
-        <PhotoListNav page="Editorial" />
+      <Layout banner={banner} hasPhotoListNav>
         <LatestPhotoList photos={photos} />
-      </Fragment>
+      </Layout>
     )
   }
 }

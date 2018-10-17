@@ -1,8 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
+import Link from '../components/Link'
 import { colors } from '../themes'
 
-const PhotoListNav = ({ page }) => {
+const PhotoListNav = () => {
   const navs = [
     {
       name: 'Editorial',
@@ -18,8 +18,8 @@ const PhotoListNav = ({ page }) => {
     <div className="root">
       {navs.map(nav => {
         return (
-          <Link key={nav.name} href={nav.path} passHref>
-            <a className={`link ${page === nav.name ? 'active' : ''}`}>
+          <Link key={nav.name} href={nav.path} activeClassName="active">
+            <a className="link">
               {nav.name}
             </a>
           </Link>

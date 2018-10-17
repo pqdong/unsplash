@@ -16,7 +16,7 @@ const Header = () => (
         </Link>
 
         <div className="right">
-          <HeaderNav page="Home" />
+          <HeaderNav />
           <HeaderUser />
         </div>
       </nav>
