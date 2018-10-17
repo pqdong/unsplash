@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects'
-import { sagaLoadLatestPhotos } from './photos'
+import { loadLatestPhotos, loadTrendingPhotos } from './photos'
 
 function* rootSaga() {
-  yield all([sagaLoadLatestPhotos])
+  yield all([loadLatestPhotos, loadTrendingPhotos])
 }
 
 export default rootSaga

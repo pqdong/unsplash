@@ -1,12 +1,16 @@
 import queryString from 'query-string'
 import { put, takeLatest } from 'redux-saga/effects'
-import { actionTypes, saveLatestPhotos } from '../reducers/photos'
+import {
+  actionTypes,
+  saveLatestPhotos,
+  saveTrendingPhotos,
+} from '../reducers/photos'
 import { fetchPublic } from '../api'
 
-function* loadLatestPhotos(data) {
+function* fetchLatestPhotos(data) {
   try {
     const res = yield fetchPublic(
-      `/photos?${queryString.stringify(data.params)}`,
+      `/photos?order_by=latest&${queryString.stringify(data.params)}`,
     )
     const payload = yield res.json()
 
@@ -16,7 +20,24 @@ function* loadLatestPhotos(data) {
   }
 }
 
-export const sagaLoadLatestPhotos = takeLatest(
+function* fetchTrendingPhotos(data) {
+  try {
+    const res = yield fetchPublic(
+      `/photos?order_by=popular&${queryString.stringify(data.params)}`,
+    )
+    const payload = yield res.json()
+
+    yield put(saveTrendingPhotos(payload))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const loadLatestPhotos = takeLatest(
   actionTypes.LOAD_LATEST_PHOTOS,
-  loadLatestPhotos,
+  fetchLatestPhotos,
+)
+export const loadTrendingPhotos = takeLatest(
+  actionTypes.LOAD_TRENDING_PHOTOS,
+  fetchTrendingPhotos,
 )

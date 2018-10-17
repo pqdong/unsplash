@@ -1,24 +1,24 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { loadLatestPhotos } from '../reducers/photos'
+import { loadTrendingPhotos } from '../reducers/photos'
 import PhotoList from '../components/PhotoList'
 
-class LatestPhotoList extends PureComponent {
+class TrendingPhotoList extends PureComponent {
   load = page => {
     this.props.dispatch(
-      loadLatestPhotos({
+      loadTrendingPhotos({
         page,
       }),
     )
   }
 
   render() {
-    const { photos, loading, latest } = this.props
+    const { photos, loading, trending } = this.props
 
     return (
       <PhotoList
         loading={loading}
-        photos={[...photos, ...latest]}
+        photos={[...photos, ...trending]}
         currentPage={4}
         onLoad={this.load}
       />
@@ -26,4 +26,4 @@ class LatestPhotoList extends PureComponent {
   }
 }
 
-export default connect(state => state.photos)(LatestPhotoList)
+export default connect(state => state.photos)(TrendingPhotoList)

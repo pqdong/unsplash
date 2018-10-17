@@ -55,20 +55,15 @@ class PhotoList extends PureComponent {
       className="item"
       style={{ paddingBottom: this.flex(photo.height, photo.width) }}
     >
-      <div className="item-inner">
-        <div className="img-wrapper">
-          <LazyLoad height={200}>
-            <img src={photo.urls.regular} className="img" />
-          </LazyLoad>
-        </div>
+      <div className="img-wrapper">
+        <LazyLoad height={200}>
+          <img src={photo.urls.regular} className="img" />
+        </LazyLoad>
       </div>
 
       <style jsx>{`
         .item {
           position: relative;
-        }
-
-        .item-inner {
           margin-bottom: ${spacing.default}
         }
 
@@ -118,12 +113,11 @@ class PhotoList extends PureComponent {
             max-width: 1320px;
             margin-left: auto;
             margin-right: auto;
-            padding-top: 48px;
           }
 
           .row {
-            margin-left: ${-1 * spacing.half};
-            margin-right: ${-1 * spacing.half};
+            margin-left: ${'-' + spacing.half};
+            margin-right: ${'-' + spacing.half};
             display: flex;
           }
 
